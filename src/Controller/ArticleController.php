@@ -9,6 +9,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
 use App\Entity\Article;
+use App\Form\ArticleType;
 
 class ArticleController extends AbstractController
 {
@@ -43,7 +44,7 @@ class ArticleController extends AbstractController
         if ($id) {
             $mode = 'update';
             // On récupère l'article qui correspond à l'id passé dans l'url
-            $article = $entityManager->getRepository(Article::class)->findBy(['id' => $id]);
+            $article = $entityManager->getRepository(Article::class)->findBy(['id' => $id])[0];
         } else {
             $mode = 'new';
             $article = new Article();
