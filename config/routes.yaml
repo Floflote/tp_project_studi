@@ -3,3 +3,29 @@ controllers:
         path: ../src/Controller/
         namespace: App\Controller
     type: attribute
+
+homepage:
+    path: /
+    controller: App\Controller\HomeController::index
+
+article_show:
+    path: /{id}
+    controller: App\Controller\ArticleController::index
+    requirements:
+        id: '\d+'
+
+article_add:
+    path: /add
+    controller: App\Controller\ArticleController::edit
+
+article_edit:
+    path: /edit/{id}
+    controller: App\Controller\ArticleController::edit
+    requirements:
+        id: '\d+'
+
+article_remove:
+    path: /remove/{id}
+    controller: App\Controller\ArticleController::remove
+    requirements:
+        id: '\d+'
