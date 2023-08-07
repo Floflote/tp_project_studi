@@ -20,6 +20,7 @@ class ArticleController extends AbstractController
      *
      * @return Response
      */
+    #[Route(path: '/{id}', name: 'article_show', requirements: ['id' => '\d+'])]
     public function index(EntityManagerInterface $entityManager, int $id): Response
     {
         // On recupere l'article qui correspond à l'id passe dans l'url
@@ -37,6 +38,8 @@ class ArticleController extends AbstractController
      *
      * @return Response
      */
+    #[Route(path: '/add', name: 'article_add')]
+    #[Route(path: '/edit/{id}', name: 'article_edit', requirements: ['id' => '\d+'])]
     public function edit(EntityManagerInterface $entityManager, Request $request, int $id = null): Response
     {
         // Si un identifiant est présent dans l'url alors il s'agit d'une modification
@@ -56,7 +59,7 @@ class ArticleController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->saveArticle($entityManager, $article, $mode);
 
-            return $this->redirectToRoute('article_edit', array('id' => $article->getId()));
+            return $this->redirectToRoute('homepage');
         }
 
         $parameters = array(
@@ -75,6 +78,7 @@ class ArticleController extends AbstractController
      *
      * @return Response
      */
+    #[Route(path: '/remove/{id}', name: 'article_remove', requirements: ['id' => '\d+'])]
     public function remove(EntityManagerInterface $entityManager, int $id): Response
     {
         $article = $entityManager->getRepository(Article::class)->findBy(['id' => $id])[0];

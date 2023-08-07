@@ -2,7 +2,7 @@ doctrine:
     dbal:
         url: '%env(resolve:DATABASE_URL)%'
         driver: 'pdo_mysql'
-        server_version: '5.7'
+        server_version: '5.7.39'
         charset: utf8mb4
         unix_socket: /Applications/MAMP/tmp/mysql/mysql.sock
         default_table_options:

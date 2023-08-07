@@ -16,6 +16,7 @@ class HomeController extends AbstractController
      * 
      * @return Response
      */
+    #[Route(path: '/', name: 'homepage')]
     public function index(EntityManagerInterface $entityManager): Response
     {
         // Toutes les donnees de l'entite ou classe Article en BDD
