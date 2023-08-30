@@ -24,7 +24,7 @@ class ArticleController extends AbstractController
     public function index(EntityManagerInterface $entityManager, int $id): Response
     {
         // On recupere l'article qui correspond à l'id passe dans l'url
-        $article = $entityManager->getRepository(Article::class)->findBy(['id' => $id]);
+        $article = $entityManager->getRepository(Article::class)->findBy(['id' => $id])[0];
 
         return $this->render('article/index.html.twig', [
             'article' => $article,
@@ -59,7 +59,7 @@ class ArticleController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->saveArticle($entityManager, $article, $mode);
 
-            return $this->redirectToRoute('homepage');
+            return $this->redirectToRoute('article_show', array('id' => $article->getId()));
         }
 
         $parameters = array(
